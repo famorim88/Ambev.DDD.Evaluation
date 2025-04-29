@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Product.UpdateProduct
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.UpdateProduct
 {
     // Application/Products/Commands/UpdateProductCommand.cs
     using MediatR;

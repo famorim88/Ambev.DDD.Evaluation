@@ -1,4 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Features.Product.CreateProduct;
+﻿using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
 using MediatR;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Product.DeleteProduct

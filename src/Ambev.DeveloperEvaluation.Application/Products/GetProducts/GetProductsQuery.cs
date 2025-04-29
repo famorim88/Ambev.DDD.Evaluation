@@ -1,8 +1,5 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Product.GetProducts
-{
-    using MediatR;
-    using Ambev.DeveloperEvaluation.WebApi.Common;
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.GetProducts;
 
-    public record GetProductsQuery(QueryParamsDto QueryParams) : IRequest<PaginatedList<ProductDto>>;
-
-}
+using Ambev.DeveloperEvaluation.Domain.Entities;
+using MediatR;
+public record GetProductsQuery(int Page, int Size, string? OrderBy) : IRequest<List<Product>>;

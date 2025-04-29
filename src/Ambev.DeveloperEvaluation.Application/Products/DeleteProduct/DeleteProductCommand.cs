@@ -1,4 +1,4 @@
-﻿namespace Ambev.DeveloperEvaluation.WebApi.Features.Product.DeleteProduct
+﻿namespace Ambev.DeveloperEvaluation.Application.Products.DeleteProduct
 {
     // Application/Products/Commands/DeleteProductCommand.cs
     using MediatR;

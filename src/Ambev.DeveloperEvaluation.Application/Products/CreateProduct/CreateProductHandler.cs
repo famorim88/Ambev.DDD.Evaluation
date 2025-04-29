@@ -1,10 +1,8 @@
-﻿using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Product.CreateProduct
+﻿
+namespace Ambev.DeveloperEvaluation.Application.Products.CreateProduct
 {
     using MediatR;
     using Domain.Entities;
-    using Ambev.DeveloperEvaluation.ORM;
     using AutoMapper;
     using Ambev.DeveloperEvaluation.Domain.Repositories;
 
