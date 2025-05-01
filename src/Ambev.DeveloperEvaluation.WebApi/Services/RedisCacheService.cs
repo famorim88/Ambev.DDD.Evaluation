@@ -7,10 +7,13 @@ namespace Ambev.DeveloperEvaluation.WebApi.Services
     public class RedisCacheService : IRedisCacheService
     {
         private readonly IDatabase _db;
+        private readonly IConnectionMultiplexer _connection;
+
 
         public RedisCacheService(IConnectionMultiplexer connection)
         {
             _db = connection.GetDatabase();
+            _connection = connection;
         }
 
         public async Task<T?> GetAsync<T>(string key)
@@ -23,6 +26,17 @@ namespace Ambev.DeveloperEvaluation.WebApi.Services
         {
             var json = JsonSerializer.Serialize(data);
             await _db.StringSetAsync(key, json, expiry ?? TimeSpan.FromMinutes(5));
+        }
+        public async Task RemoveByPrefixAsync(string prefix)
+        {
+            var endpoints = _connection.GetEndPoints();
+            var server = _connection.GetServer(endpoints.First());
+
+            var keys = server.Keys(pattern: $"{prefix}*").ToArray();
+            foreach (var key in keys)
+            {
+                await _db.KeyDeleteAsync(key);
+            }
         }
     }
 }
