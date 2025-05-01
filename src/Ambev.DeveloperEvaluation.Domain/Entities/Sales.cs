@@ -9,13 +9,14 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
     public class Sales : BaseEntity
     {
-        public int SaleNumber { get; set; }
+        public int? SaleNumber { get; set; }
         public DateTime Date { get; set; }
         public Customer Customer { get; set; }
         public Branch Branch { get; set; }
         public List<SaleItem> Items { get; set; }
         public decimal TotalAmount { get; set; }
-        public bool Cancelled { get; set; }
+        public void HandleTotalAmount() => TotalAmount = Items.Sum(x => x.Total);
+        public bool Cancelled { get; set; } = false;
         public Sales() 
         {
             Id = Guid.NewGuid();

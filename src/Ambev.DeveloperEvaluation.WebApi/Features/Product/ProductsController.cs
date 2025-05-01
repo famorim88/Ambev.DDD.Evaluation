@@ -1,9 +1,14 @@
 ﻿// Controllers/ProductsController.cs
 using Ambev.DeveloperEvaluation.WebApi.Common;
-using Ambev.DeveloperEvaluation.WebApi.Features.Product.CreateProduct;
-using Ambev.DeveloperEvaluation.WebApi.Features.Product;
+using Ambev.DeveloperEvaluation.Application.Products.CreateProduct;
+using Ambev.DeveloperEvaluation.Application.Products.DeleteProduct;
+using Ambev.DeveloperEvaluation.Application.Products.GetProductById;
+using Ambev.DeveloperEvaluation.Application.Products.GetProducts;
+using Ambev.DeveloperEvaluation.Application.Products.UpdateProduct;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Ambev.DeveloperEvaluation.Application.Products;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -19,8 +24,9 @@ public class ProductsController : BaseController
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] QueryParamsDto queryParams)
     {
-        var result = await _mediator.Send(new GetProductsQuery(queryParams));
-        return OkPaginated(result);
+        var result = await _mediator.Send(new GetProductsQuery(queryParams.Page,queryParams.Size,queryParams.OrderBy));
+        var response = new PaginatedList<Product>(result,result.Count, queryParams.Page, queryParams.Size);
+        return OkPaginated(response);
     }
 
     [HttpGet("{id}")]
